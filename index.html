@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101B32">
+
+    <title>Typing Challenge Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <header class="topbar">
+        <a href="#" class="brand" onclick="goHome(); return false;">
+            <span class="brand-icon">T</span>
+            <span>Type<span class="brand-highlight">Quest</span></span>
+        </a>
+
+        <div class="topbar-right">
+            <span class="status-dot"></span>
+            <span class="topbar-label">Typing Challenge Arena</span>
+        </div>
+    </header>
+
+
+    <!-- HOME SCREEN -->
+
+    <main id="homeScreen" class="screen active">
+
+        <section class="hero-section">
+
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                LEVEL UP YOUR TYPING
+                <span class="eyebrow-line"></span>
+            </div>
+
+            <h1>
+                Ready, Set,<br>
+                <span class="gradient-text">Type!</span>
+            </h1>
+
+            <p class="hero-description">
+                Challenge your reflexes, sharpen your accuracy,
+                and become a keyboard master.
+            </p>
+
+        </section>
+
+
+        <section class="mode-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="small-label">CHOOSE YOUR GAME</span>
+                    <h2>Select a Challenge</h2>
+                </div>
+
+                <span class="mode-count">02 MODES</span>
+            </div>
+
+
+            <div class="mode-grid">
+
+                <!-- BUBBLES CARD -->
+
+                <article class="mode-card bubbles-card">
+
+                    <div class="card-top">
+                        <div class="mode-icon bubble-icon">
+                            <span>✦</span>
+                        </div>
+
+                        <span class="mode-tag">REFLEX GAME</span>
+                    </div>
+
+                    <h3>Bubbles Challenge</h3>
+
+                    <p>
+                        Letters are floating across your screen.
+                        Press the matching key before they escape!
+                    </p>
+
+                    <div class="card-features">
+                        <span>● Fast Reflexes</span>
+                        <span>● Letter Matching</span>
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        onclick="openSetup('bubbles')">
+                        Play Bubbles
+                        <span>→</span>
+                    </button>
+
+                </article>
+
+
+                <!-- KEYMAGNET CARD -->
+
+                <article class="mode-card magnet-card">
+
+                    <div class="card-top">
+                        <div class="mode-icon magnet-icon">
+                            <span>⌨</span>
+                        </div>
+
+                        <span class="mode-tag">ACCURACY GAME</span>
+                    </div>
+
+                    <h3>KeyMagnet</h3>
+
+                    <p>
+                        Follow the target letters, practice your
+                        keyboard skills, and improve your accuracy.
+                    </p>
+
+                    <div class="card-features">
+                        <span>● Keyboard Practice</span>
+                        <span>● Response Time</span>
+                    </div>
+
+                    <button
+                        class="primary-button orange-button"
+                        onclick="openSetup('keymagnet')">
+                        Play KeyMagnet
+                        <span>→</span>
+                    </button>
+
+                </article>
+
+            </div>
+        </section>
+
+
+        <footer class="footer">
+            <span>TYPEQUEST © 2026</span>
+            <span>Practice • Improve • Achieve</span>
+        </footer>
+
+    </main>
+
+
+    <!-- SETUP SCREEN -->
+
+    <main id="setupScreen" class="screen">
+
+        <section class="setup-wrapper">
+
+            <button class="back-button" onclick="goHome()">
+                ← Back to Home
+            </button>
+
+            <div class="setup-card">
+
+                <div class="setup-icon" id="setupIcon">✦</div>
+
+                <span class="small-label">GET READY</span>
+
+                <h2 id="setupTitle">Bubbles Challenge</h2>
+
+                <p id="setupDescription">
+                    Choose your difficulty and prepare for the challenge.
+                </p>
+
+
+                <div class="form-group">
+                    <label for="difficulty">Choose Difficulty</label>
+
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group" id="keySetGroup">
+                    <label for="keySet">Choose Practice Keys</label>
+
+                    <select id="keySet">
+                        <option value="home">Home Row (A S D F J K L)</option>
+                        <option value="top">Top + Home Row</option>
+                        <option value="all">All Alphabet Keys</option>
+                    </select>
+                </div>
+
+
+                <div class="difficulty-info">
+                    <span class="info-icon">ⓘ</span>
+                    <span id="difficultyInfo">
+                        Easy mode is perfect for beginners.
+                    </span>
+                </div>
+
+
+                <button
+                    class="primary-button setup-start"
+                    onclick="startGame()">
+                    Start Challenge
+                    <span>→</span>
+                </button>
+
+            </div>
+
+            <p class="setup-note">
+                Get focused. Trust your fingers. Start typing!
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- GAME SCREEN -->
+
+    <main id="gameScreen" class="screen">
+
+        <section class="game-wrapper">
+
+            <div class="game-heading">
+
+                <button class="back-button" onclick="goHome()">
+                    ← Home
+                </button>
+
+                <div class="game-heading-text">
+                    <span class="small-label">YOUR CHALLENGE</span>
+                    <h2 id="gameTitle">Bubbles Challenge</h2>
+                </div>
+
+                <span class="difficulty-badge" id="difficultyBadge">
+                    EASY
+                </span>
+
+            </div>
+
+
+            <!-- GAME STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span class="stat-label">SCORE</span>
+                    <strong id="score">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label" id="secondLabel">MISSES</span>
+                    <strong id="secondStat">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label" id="thirdLabel">LEVEL</span>
+                    <strong id="thirdStat">1</strong>
+                </div>
+
+                <div class="stat-card timer-stat">
+                    <span class="stat-label">TIME LEFT</span>
+                    <strong id="timer">--</strong>
+                </div>
+
+            </div>
+
+
+            <!-- BUBBLES GAME -->
+
+            <section id="bubbleArea" class="play-area hidden">
+
+                <div class="play-area-heading">
+                    <span class="live-indicator"></span>
+                    <span>LETTER BUBBLES</span>
+                    <span class="play-hint">Press the matching letter</span>
+                </div>
+
+                <div class="bubble-stage" id="bubbleStage">
+
+                    <div id="bubbleContainer"></div>
+
+                    <div class="game-intro" id="gameIntro">
+                        <div class="intro-symbol">✦</div>
+                        <h3>Ready to Pop?</h3>
+                        <p>Press Start Game to begin your challenge.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- KEYMAGNET GAME -->
+
+            <section id="magnetArea" class="play-area hidden">
+
+                <div class="play-area-heading">
+                    <span class="live-indicator orange-live"></span>
+                    <span>KEYBOARD PRECISION</span>
+                    <span class="play-hint">Find your target key</span>
+                </div>
+
+                <div class="magnet-stage">
+
+                    <span class="target-label">YOUR TARGET KEY</span>
+
+                    <div id="targetKey" class="target-key">?</div>
+
+                    <p id="magnetInstruction">
+                        Press the matching key on your keyboard.
+                    </p>
+
+                </div>
+
+
+                <div class="keyboard">
+
+                    <div class="key-row">
+                        <span data-key="Q">Q</span>
+                        <span data-key="W">W</span>
+                        <span data-key="E">E</span>
+                        <span data-key="R">R</span>
+                        <span data-key="T">T</span>
+                        <span data-key="Y">Y</span>
+                        <span data-key="U">U</span>
+                        <span data-key="I">I</span>
+                        <span data-key="O">O</span>
+                        <span data-key="P">P</span>
+                    </div>
+
+                    <div class="key-row">
+                        <span data-key="A">A</span>
+                        <span data-key="S">S</span>
+                        <span data-key="D">D</span>
+                        <span data-key="F">F</span>
+                        <span data-key="G">G</span>
+                        <span data-key="H">H</span>
+                        <span data-key="J">J</span>
+                        <span data-key="K">K</span>
+                        <span data-key="L">L</span>
+                    </div>
+
+                    <div class="key-row">
+                        <span data-key="Z">Z</span>
+                        <span data-key="X">X</span>
+                        <span data-key="C">C</span>
+                        <span data-key="V">V</span>
+                        <span data-key="B">B</span>
+                        <span data-key="N">N</span>
+                        <span data-key="M">M</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FEEDBACK -->
+
+            <div class="feedback-area">
+                <span id="feedback">
+                    Choose Start Game when you are ready.
+                </span>
+            </div>
+
+
+            <!-- GAME CONTROLS -->
+
+            <div class="game-controls">
+
+                <button
+                    class="primary-button control-start"
+                    id="startButton"
+                    onclick="startGame()">
+                    ▶ Start Game
+                </button>
+
+                <button
+                    class="secondary-button"
+                    onclick="restartGame()">
+                    ↻ Restart
+                </button>
+
+                <button
+                    class="secondary-button"
+                    onclick="resetGame()">
+                    Reset
+                </button>
+
+            </div>
+
+            <p class="game-tip">
+                TIP: Keep your eyes on the screen and your fingers ready.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- RESULTS SCREEN -->
+
+    <main id="resultScreen" class="screen">
+
+        <section class="result-wrapper">
+
+            <div class="result-card">
+
+                <div class="result-icon">🏆</div>
+
+                <span class="small-label">CHALLENGE FINISHED</span>
+
+                <h2 id="resultTitle">Great Job!</h2>
+
+                <p id="resultMessage">
+                    You completed your typing challenge.
+                </p>
+
+                <div class="final-score-box">
+                    <span>YOUR FINAL SCORE</span>
+                    <strong id="finalScore">0</strong>
+                    <small>POINTS</small>
+                </div>
+
+                <div class="result-stats" id="resultStats"></div>
+
+                <div class="result-controls">
+
+                    <button
+                        class="primary-button"
+                        onclick="playAgain()">
+                        Play Again →
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="goHome()">
+                        Home
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
